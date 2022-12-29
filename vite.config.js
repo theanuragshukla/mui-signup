@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/mui-signup/",
+  base: "/",
   plugins: [
     react(),
     VitePWA({
@@ -12,11 +12,13 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
-      injectRegister: null,
+      injectRegister: "script",
+      strategies: 'injectManifest',
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         swDest: "dist/sw.js",
+		  cacheId:"gcjgdkcgcg"
       },
       manifest: {
         name: "mui-signup",
