@@ -18,6 +18,8 @@
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "workbox-cli": "^6.5.4",
+    "workbox-window": "^6.5.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {
