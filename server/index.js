@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 //subscribe route
-app.post("/subscribe", (req, res) => {
+app.post("https://pwa-push-server.onrender.com/subscribe", (req, res) => {
   //get push subscription object
   const subscription = req.body;
   console.log(subscription);
