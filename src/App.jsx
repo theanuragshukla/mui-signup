@@ -25,7 +25,7 @@ async function send(serviceWorkerRegistration) {
   serviceWorkerRegistration.pushManager.subscribe(options).then(
     async (pushSubscription) => {
       console.log(pushSubscription.endpoint);
-      await fetch("http://localhost:3000/subscribe", {
+      await fetch("https://pwa-push-server.onrender.com/subscribe", {
         method: "POST",
         body: JSON.stringify(pushSubscription),
         headers: {
