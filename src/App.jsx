@@ -57,7 +57,17 @@ function App() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
-        send(serviceWorkerRegistration);
+        serviceWorkerRegistration.pushManager
+          .getSubscription()
+          .then((subscription) => {
+            if (!subscription) {
+              send(serviceWorkerRegistration);
+              return;
+            }
+          })
+          .catch((err) => {
+            console.error(`Error during getSubscription(): ${err}`);
+          });
       });
     }
   }, []);
