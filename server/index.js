@@ -1,22 +1,24 @@
+require('dotenv').config()
 const express = require('express');
 const webpush = require('web-push');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors')
 const app = express();
+
 app.use(cors())
 app.use(express.static(__dirname+'/static'))
-
 app.use(express.static(path.join(__dirname, "client")));
 app.use(bodyParser.json())
-const publicVapidKey = 'BB1hwvVLRa3fx56npRsQghzXs4gq9nMmEJHKtSoPSdlU98QD7CQL_6r9lGWlP_04bBes6Ef7OXy7sGoBMu0PPZc';
-const privateVapidKey = 'QIna-gxRSFrqhgyIc6guABhQ60485M2waty-iGEHzK8';
+
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY
 
 let sub = {}
 
 webpush.setVapidDetails('mailto:test@test.com', publicVapidKey,privateVapidKey);
 app.get('/', (req, res)=>{
-	res.sendFile(__dirname+'/index.html')
+	res.end("alive!")
 })
 
 app.post('/subscribe', (req, res)=>{

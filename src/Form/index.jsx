@@ -7,7 +7,6 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import {typography} from "@mui/system";
 import { Formik } from "formik";
 import SignUpSchema from "../yupSchema";
 import InputField from "./Input";
@@ -99,13 +98,14 @@ const Form = () => {
                     Start Onboarding
                   </Button>
                 </Grid>
-			<Grid item small = {12} align="center">
-<Typography variant="body2" component={"span"}>Already have an Account? </Typography>
-	<Link href="/login">Login</Link>
-
-			</Grid>
+                <Grid item small={12} align="center">
+                  <Typography variant="body2" component={"span"}>
+                    Already have an Account?{" "}
+                  </Typography>
+                  <Link href="/login">Login</Link>
+                </Grid>
               </Grid>
-		            </Paper>
+            </Paper>
           </form>
         );
       }}
