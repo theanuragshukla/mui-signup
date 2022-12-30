@@ -1,6 +1,8 @@
 const publicVapidKey =
   "BB1hwvVLRa3fx56npRsQghzXs4gq9nMmEJHKtSoPSdlU98QD7CQL_6r9lGWlP_04bBes6Ef7OXy7sGoBMu0PPZc";
 
+import { serverUrl } from "./secrets.js";
+
 async function send(serviceWorkerRegistration) {
   const options = {
     userVisibleOnly: true,
@@ -9,19 +11,35 @@ async function send(serviceWorkerRegistration) {
   serviceWorkerRegistration.pushManager.subscribe(options).then(
     async (pushSubscription) => {
       console.log(pushSubscription.endpoint);
-      await fetch("https://pwa-push-server.onrender.com/subscribe", {
+      await fetch(serverUrl, {
         method: "POST",
         body: JSON.stringify(pushSubscription),
         headers: {
           "content-type": "application/json",
         },
-      });
+      }).then(res=>{
+		  if(res.status==201){
+			  alert("registered")
+		  }
+	  })
+		.catch(err=>{
+			alert("some error occoured")
+			console.log(err)
+		});
     },
     (error) => {
       console.error(error);
     }
   );
 }
+
+const forceRegisterPush = () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+      send(serviceWorkerRegistration);
+    });
+  }
+};
 
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -39,3 +57,4 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 export default send;
+export { forceRegisterPush };

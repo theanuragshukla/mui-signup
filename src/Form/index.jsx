@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Formik } from "formik";
+import {forceRegisterPush} from "../PushSubscription";
 import SignUpSchema from "../yupSchema";
 import InputField from "./Input";
 
@@ -104,6 +105,15 @@ const Form = () => {
                   </Typography>
                   <Link href="/login">Login</Link>
                 </Grid>
+  <Grid item small={12} align="center">
+                  <Button
+			onClick={forceRegisterPush}
+                    variant="contained"
+                  >
+			register for push
+                  </Button>
+                </Grid>
+
               </Grid>
             </Paper>
           </form>
